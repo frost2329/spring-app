@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestConstructor;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -56,7 +55,7 @@ public class UserServiceIT {
         assertEquals(userCreateEditDto.getFirstname(), result.getFirstname());
         assertEquals(userCreateEditDto.getLastname(), result.getLastname());
         assertEquals(userCreateEditDto.getRole().name(), result.getRole().name());
-        assertEquals(userCreateEditDto.getCompanyId(), result.getCompanyDto().getId());
+        assertEquals(userCreateEditDto.getCompanyId(), result.getCompany().getId());
     }
 
     @Test
@@ -78,7 +77,7 @@ public class UserServiceIT {
             assertEquals(userCreateEditDto.getFirstname(), result.getFirstname());
             assertEquals(userCreateEditDto.getLastname(), result.getLastname());
             assertEquals(userCreateEditDto.getRole().name(), result.getRole().name());
-            assertEquals(userCreateEditDto.getCompanyId(), result.getCompanyDto().getId());
+            assertEquals(userCreateEditDto.getCompanyId(), result.getCompany().getId());
         }
     }
 

@@ -1,16 +1,17 @@
 package by.frost.service;
 
-import by.frost.database.entity.User;
 import by.frost.database.repository.UserRepository;
 import by.frost.dto.UserCreateEditDto;
 import by.frost.dto.UserReadDto;
 import by.frost.mapper.UserMapper;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +19,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly=true)
-public class UserService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserMapper userMapper;
+public class UserService implements UserDetailsService {
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     public Optional<UserReadDto> findById(Integer id) {
         return userRepository.findById(id).map(userMapper::mapToUserReadDto);
@@ -61,5 +60,15 @@ public class UserService {
                     return true;
                 })
                 .orElse(false);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username)
+                .map(entity -> new org.springframework.security.core.userdetails.User(
+                        entity.getUsername(),
+                        entity.getPassword(),
+                        Collections.singleton(entity.getRole())
+                )).orElseThrow( () -> new UsernameNotFoundException("User is not found " + username));
     }
 }

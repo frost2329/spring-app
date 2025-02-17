@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS users
 (
     id         SERIAL PRIMARY KEY,
     username   VARCHAR(64) NOT NULL UNIQUE,
+    password   varchar(128) default '{noop}123',
     birth_date DATE,
     firstname  VARCHAR(64),
     lastname   VARCHAR(64),

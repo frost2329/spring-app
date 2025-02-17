@@ -22,6 +22,8 @@ public class User implements BaseEntity<Integer> {
     private Integer id;
     private String username;
 
+    private String password;
+
     @Column(name = "birth_date")
     private LocalDate birthDate;
 

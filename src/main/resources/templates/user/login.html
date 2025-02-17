@@ -5,21 +5,25 @@
     <title>Title</title>
 </head>
 <body>
+
 <form action="/login" method="post">
     <label for="username"><b>Username</b>
         <input id="username" type="text" placeholder="Enter Username" name="username" required>
     </label> <br>
-
     <label for="password"><b>Password</b>
         <input id="password" type="password" placeholder="Enter Password" name="password" required>
     </label><br>
-
+    <div style="color: red" th:if="${param.error}">
+        Invalid username or password
+    </div>
     <button type="submit">Login</button>
 </form>
+
 
 <form action="/users/registration">
     <button type="submit">Registration</button>
 </form>
+
 
 </body>
 </html>
