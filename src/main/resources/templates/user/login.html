@@ -5,12 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-
+<div th:insert="~{fragments::locale}"></div>
 <form action="/login" method="post">
-    <label for="username"><b>Username</b>
+    <label for="username"><span th:text="#{login.username}">Username</span>
         <input id="username" type="text" placeholder="Enter Username" name="username" required>
     </label> <br>
-    <label for="password"><b>Password</b>
+    <label for="password"><span th:text="#{login.password}">Username</span>
         <input id="password" type="password" placeholder="Enter Password" name="password" required>
     </label><br>
     <div style="color: red" th:if="${param.error}">
