@@ -26,3 +26,8 @@ spring:
 
   messages:
     basename: messages
+
+app:
+  service:
+    logging:
+      enabled: true
